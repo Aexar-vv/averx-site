@@ -2,37 +2,486 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <title>AVERX · 首页</title>
+  <title>AVERX · 科技互联网品牌官网（动态版）</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
+    *{box-sizing:border-box;margin:0;padding:0}
     body{
-      margin:0;
       font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:#020617;
+      background:radial-gradient(circle at top,#0f172a,#020617 55%,#000);
       color:#e5e7eb;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      min-height:100vh;
-      text-align:center;
+      line-height:1.6;
     }
-    h1{font-size:32px;margin-bottom:12px;}
-    p{font-size:14px;opacity:0.8;margin-bottom:18px;}
-    a{
-      display:inline-block;
-      padding:10px 18px;
+    a{text-decoration:none;color:inherit}
+
+    header{
+      position:sticky;top:0;z-index:10;
+      background:rgba(15,23,42,0.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(148,163,184,0.35);
+    }
+    .nav{
+      max-width:1080px;margin:0 auto;
+      padding:10px 16px;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .nav-left{display:flex;align-items:center;gap:10px}
+    .logo-wrap{
+      width:36px;height:36px;border-radius:999px;
+      background:radial-gradient(circle at center,#0ea5e9,#020617);
+      box-shadow:0 0 16px rgba(56,189,248,0.9);
+      display:flex;align-items:center;justify-content:center;
+      border:1px solid rgba(56,189,248,0.8);
+      overflow:hidden;
+    }
+    .logo-wrap img{width:82%;height:82%;object-fit:contain}
+    .nav-title-main{font-weight:700;letter-spacing:2px;font-size:16px}
+    .nav-title-sub{font-size:11px;opacity:0.7}
+    .nav-links{display:flex;gap:14px;font-size:13px}
+    .nav-links a{opacity:0.7;position:relative;padding-bottom:2px;}
+    .nav-links a.active{opacity:1;}
+    .nav-links a.active::after{
+      content:"";
+      position:absolute;left:0;bottom:0;
+      height:2px;width:100%;
+      background:linear-gradient(90deg,#22d3ee,#3b82f6);
       border-radius:999px;
+    }
+
+    main{max-width:1080px;margin:0 auto;padding:20px 16px 40px;}
+
+    .hero{
+      display:flex;flex-direction:column-reverse;
+      gap:22px;margin-top:12px;margin-bottom:32px;
+    }
+    .hero-text h1{
+      font-size:28px;
+      margin-bottom:10px;
+    }
+    .hero-text p{
+      font-size:13px;
+      opacity:0.85;
+      margin-bottom:18px;
+    }
+    .hero-badges{
+      display:flex;flex-wrap:wrap;gap:8px;
+      margin-bottom:18px;
+    }
+    .badge{
+      font-size:11px;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.5);
+      background:rgba(15,23,42,0.9);
+      opacity:0.9;
+    }
+    .hero-actions{
+      display:flex;flex-wrap:wrap;gap:10px;
+    }
+    .btn{
+      padding:10px 16px;border-radius:999px;
+      border:none;cursor:pointer;font-size:13px;
+      display:inline-flex;align-items:center;gap:6px;
+      font-weight:600;
+    }
+    .btn-primary{
       background:linear-gradient(120deg,#22d3ee,#3b82f6,#8b5cf6);
       color:#020617;
-      font-weight:600;
-      text-decoration:none;
+      box-shadow:0 10px 30px rgba(37,99,235,0.8);
+    }
+    .btn-secondary{
+      background:rgba(15,23,42,0.95);
+      border:1px solid rgba(148,163,184,0.7);
+      color:#e5e7eb;
+    }
+    .btn:active{transform:translateY(1px);box-shadow:none}
+
+    .hero-visual{
+      display:flex;align-items:center;justify-content:center;
+    }
+    .hero-circle{
+      width:220px;height:220px;border-radius:999px;
+      border:1px solid rgba(56,189,248,0.8);
+      box-shadow:
+        0 0 40px rgba(56,189,248,0.6),
+        0 0 120px rgba(37,99,235,0.4);
+      background:
+        radial-gradient(circle at top,#1d4ed8 0,#020617 45%,#000 100%);
+      display:flex;align-items:center;justify-content:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-circle::before{
+      content:"";position:absolute;inset:20px;
+      border-radius:999px;
+      border:1px dashed rgba(148,163,184,0.5);
+      opacity:0.5;
+    }
+    .hero-circle-inner{
+      position:relative;z-index:1;
+      display:flex;flex-direction:column;align-items:center;
+      gap:6px;
+    }
+    .hero-brand{
+      font-size:26px;font-weight:800;letter-spacing:4px;
+    }
+    .hero-tag{
+      font-size:11px;opacity:0.8;
+    }
+    .hero-rotating{
+      font-size:11px;opacity:0.8;margin-top:4px;
+    }
+
+    section{margin-bottom:32px;}
+    .section-title{
+      font-size:18px;font-weight:700;margin-bottom:6px;
+    }
+    .section-sub{font-size:12px;opacity:0.75;margin-bottom:14px;}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+      gap:14px;
+    }
+    .card{
+      background:rgba(15,23,42,0.98);
+      border-radius:16px;
+      border:1px solid rgba(148,163,184,0.45);
+      padding:14px;
+      box-shadow:0 18px 40px rgba(15,23,42,0.9);
+      font-size:13px;
+    }
+    .card h3{font-size:14px;margin-bottom:6px;}
+    .card p{font-size:12px;opacity:0.88;}
+
+    .service-tag{
+      display:inline-block;
+      font-size:11px;
+      padding:3px 8px;
+      border-radius:999px;
+      margin-bottom:4px;
+      background:rgba(15,23,42,0.95);
+      border:1px solid rgba(59,130,246,0.7);
+      color:#bfdbfe;
+    }
+
+    .roadmap-step{
+      display:flex;gap:10px;align-items:flex-start;
+      padding:10px 0;
+    }
+    .roadmap-num{
+      width:22px;height:22px;border-radius:999px;
+      border:1px solid rgba(56,189,248,0.8);
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px;
+      margin-top:2px;
+    }
+    .roadmap-content h3{font-size:13px;margin-bottom:3px;}
+    .roadmap-content p{font-size:12px;opacity:0.8;}
+
+    .contact-wrap{
+      display:grid;
+      grid-template-columns:1.1fr 1fr;
+      gap:14px;
+    }
+    .contact-form{
+      background:rgba(15,23,42,0.98);
+      border-radius:16px;
+      border:1px solid rgba(148,163,184,0.45);
+      padding:14px;
+      font-size:13px;
+    }
+    .form-row{margin-bottom:10px;text-align:left;}
+    label{font-size:12px;opacity:0.8;display:block;margin-bottom:4px;}
+    input,textarea{
+      width:100%;border-radius:10px;
+      border:1px solid rgba(30,64,175,0.7);
+      background:#020617;
+      color:#e5e7eb;
+      padding:8px 10px;font-size:13px;
+    }
+    textarea{min-height:90px;resize:vertical;}
+    .contact-info{
+      font-size:13px;
+      display:flex;flex-direction:column;gap:8px;
+    }
+    .social-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+    .social-pill{
+      font-size:12px;
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.5);
+      background:rgba(15,23,42,0.9);
+    }
+
+    footer{
+      border-top:1px solid rgba(30,41,59,0.9);
+      padding:12px 16px 18px;
+      font-size:11px;
+      opacity:0.7;
+      text-align:center;
+    }
+
+    @media(max-width:720px){
+      .hero{flex-direction:column-reverse;}
+      .contact-wrap{grid-template-columns:1fr;}
+      .hero-text h1{font-size:24px;}
+      .hero-circle{width:200px;height:200px;}
+      .nav-links{display:none;} /* 手机上简单点，先隐藏导航文字 */
     }
   </style>
 </head>
 <body>
-  <h1>AVERX</h1>
-  <p>这里是 AVERX 的测试首页，先把 GitHub Pages 跑起来。</p>
-  <a href="shop.html">进入商店（后面再做）</a>
+  <header>
+    <div class="nav">
+      <div class="nav-left">
+        <div class="logo-wrap">
+          <!-- TODO: 把 averx-logo.png 上传到仓库同目录，就会显示 Logo -->
+          <img src="averx-logo.png" alt="AVERX Logo" />
+        </div>
+        <div>
+          <div class="nav-title-main">AVERX</div>
+          <div class="nav-title-sub">科技 · 数字品牌 · 互联网服务</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#hero" data-link="hero" class="active">首页</a>
+        <a href="#services" data-link="services">服务</a>
+        <a href="#roadmap" data-link="roadmap">流程</a>
+        <a href="#contact" data-link="contact">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero 区域 -->
+    <section class="hero" id="hero">
+      <div class="hero-text">
+        <h1 id="hero-title">为个人与小团队，搭建下一代数字品牌入口。</h1>
+        <p id="hero-sub">
+          AVERX 专注互联网视觉、着陆页与自动化思路，让一个人也可以拥有高质量的「品牌级」线上形象。
+        </p>
+        <div class="hero-badges" id="hero-badges">
+          <!-- 动态标签 -->
+        </div>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">立即沟通项目</a>
+          <a href="#services" class="btn btn-secondary">查看服务方向</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-circle">
+          <div class="hero-circle-inner">
+            <div class="hero-brand">AVERX</div>
+            <div class="hero-tag">Digital Brand Studio</div>
+            <div class="hero-rotating" id="hero-rotating-text"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 服务：由 JS 动态渲染 -->
+    <section id="services">
+      <h2 class="section-title">服务方向</h2>
+      <p class="section-sub">
+        从视觉到页面，再到自动化执行，以下模块可以单独选，也可以组合成一套完整方案。
+      </p>
+      <div class="grid" id="services-list"></div>
+    </section>
+
+    <!-- 项目流程：由 JS 动态渲染 -->
+    <section id="roadmap">
+      <h2 class="section-title">合作流程</h2>
+      <p class="section-sub">
+        用尽量简单的流程，把需求变成一个真正上线运转的系统。
+      </p>
+      <div class="card" id="roadmap-card">
+        <!-- roadmap 内容由 JS 注入 -->
+      </div>
+    </section>
+
+    <!-- 联系 -->
+    <section id="contact">
+      <h2 class="section-title">联系 AVERX</h2>
+      <p class="section-sub">简单描述你的想法，留下一个联系方式，就可以开始聊项目。</p>
+
+      <div class="contact-wrap">
+        <div class="contact-form">
+          <form onsubmit="handleSubmit(event)">
+            <div class="form-row">
+              <label for="name">你的称呼</label>
+              <input id="name" name="name" placeholder="例如：Aexar / 小李" />
+            </div>
+            <div class="form-row">
+              <label for="contactField">联系方式（微信 / 邮箱 / Telegram）</label>
+              <input id="contactField" name="contact" placeholder="必填，用于回复你" required />
+            </div>
+            <div class="form-row">
+              <label for="message">你的需求 / 想法</label>
+              <textarea id="message" name="message" placeholder="简单写一下你想做什么：网站、视觉、脚本等"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">发送给 AVERX</button>
+          </form>
+        </div>
+        <div class="contact-info">
+          <div>
+            📧 邮箱：<a href="mailto:aexar.vv@gmail.com">aexar.vv@gmail.com</a><br/>
+            🌐 现用网址：<a href="https://aexar-vv.github.io/averx-site/" target="_blank">aexar-vv.github.io/averx-site</a>
+          </div>
+          <div>
+            社交平台（示例）：
+            <div class="social-links">
+              <span class="social-pill">Facebook（预留）</span>
+              <span class="social-pill">Instagram（预留）</span>
+              <span class="social-pill">X / Twitter（预留）</span>
+            </div>
+          </div>
+          <div>
+            建议：<br/>
+            先把官网作为统一入口，名片 / 简介 / 个人资料都指向这里，再慢慢增加案例与产品。
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> AVERX · Digital Brand & Internet Studio
+  </footer>
+
+  <script>
+    // ========= 动态数据配置区域 =========
+    // TODO：你以后只要改这里的数据，整个站的卡片和流程就会跟着变
+
+    const heroBadgesData = [
+      "品牌视觉 · LOGO · 海报",
+      "轻量级网站 · 着陆页",
+      "自动化 · 脚本思路",
+      "个人 / 小团队数字品牌"
+    ];
+
+    const rotatingTaglines = [
+      "Make Small Brands Look Big.",
+      "Launch Fast. Iterate Publicly.",
+      "Less Noise, More Signal.",
+      "Design · Code · Automation."
+    ];
+
+    const servicesData = [
+      {
+        tag: "品牌视觉",
+        title: "Logo / 视觉系统 / 海报",
+        desc: "为你设计或整理一套统一的视觉系统，可用于头像、封面、海报、PPT、短视频封面等。"
+      },
+      {
+        tag: "网站着陆页",
+        title: "个人主页 / 项目介绍页",
+        desc: "基于静态网站 + GitHub Pages / 未来独立服务器，搭建一页式或多页网站，适合放在社交资料和名片上。"
+      },
+      {
+        tag: "自动化与脚本思路",
+        title: "重复工作自动化方案",
+        desc: "针对你现在的工作流，找出可自动化环节（采集、整理、发布），给出工具组合和脚本设计思路。"
+      }
+    ];
+
+    const roadmapData = [
+      {
+        title: "01 · 聊清楚你要做什么",
+        content: "通过文字 / 语音简单沟通：你是谁、现在在做什么、希望这个网站/品牌帮你达成什么。"
+      },
+      {
+        title: "02 · 拆成可以落地的小模块",
+        content: "不一次性做很大，而是先拆成 Logo + 一页官网 + 一个简单自动化动作，先跑起来再慢慢升级。"
+      },
+      {
+        title: "03 · 设计 + 实现 + 上线",
+        content: "确定结构和文案后，完成视觉设计和前端实现，上线到 GitHub Pages 或你自己的域名和服务器。"
+      },
+      {
+        title: "04 · 迭代 & 扩展",
+        content: "根据你的实际使用情况，再逐步扩展新模块：案例页、博客、商店、支付系统等。"
+      }
+    ];
+
+    // ========= 运行逻辑 =========
+
+    // 设置年份
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 渲染 hero 标签
+    const heroBadgesWrap = document.getElementById('hero-badges');
+    heroBadgesWrap.innerHTML = heroBadgesData
+      .map(text => `<span class="badge">${text}</span>`)
+      .join("");
+
+    // 轮播一句话（hero 下的小字）
+    const rotatingEl = document.getElementById('hero-rotating-text');
+    let taglineIndex = 0;
+    function updateTagline() {
+      rotatingEl.textContent = rotatingTaglines[taglineIndex];
+      taglineIndex = (taglineIndex + 1) % rotatingTaglines.length;
+    }
+    updateTagline();
+    setInterval(updateTagline, 3500);
+
+    // 渲染服务卡片
+    const servicesListEl = document.getElementById('services-list');
+    servicesListEl.innerHTML = servicesData.map(s => `
+      <div class="card">
+        <span class="service-tag">${s.tag}</span>
+        <h3>${s.title}</h3>
+        <p>${s.desc}</p>
+      </div>
+    `).join("");
+
+    // 渲染 Roadmap
+    const roadmapCardEl = document.getElementById('roadmap-card');
+    roadmapCardEl.innerHTML = roadmapData.map((step, i) => `
+      <div class="roadmap-step">
+        <div class="roadmap-num">${i+1}</div>
+        <div class="roadmap-content">
+          <h3>${step.title}</h3>
+          <p>${step.content}</p>
+        </div>
+      </div>
+    `).join("");
+
+    // 简单导航高亮（根据滚动位置）
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = ['hero','services','roadmap','contact'].map(id => document.getElementById(id));
+
+    window.addEventListener('scroll', () => {
+      let currentId = 'hero';
+      const scrollY = window.scrollY + 120;
+      sections.forEach(sec => {
+        if (sec.offsetTop <= scrollY) currentId = sec.id;
+      });
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.dataset.link === currentId);
+      });
+    });
+
+    // 简单 mailto 表单
+    function handleSubmit(e){
+      e.preventDefault();
+      var name = document.getElementById('name').value.trim();
+      var contact = document.getElementById('contactField').value.trim();
+      var msg = document.getElementById('message').value.trim();
+
+      if(!contact){
+        alert("请至少填写一个联系方式。");
+        return;
+      }
+
+      var body =
+        '称呼：' + (name || '未填写') + '%0D%0A' +
+        '联系方式：' + contact + '%0D%0A' +
+        '需求：%0D%0A' + (msg || '未填写');
+
+      window.location.href = 'mailto:aexar.vv@gmail.com?subject=来自 AVERX 官网的咨询&body=' + body;
+    }
+    window.handleSubmit = handleSubmit;
+  </script>
 </body>
 </html>
