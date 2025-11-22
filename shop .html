@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AVERX 商店</title>
+<style>
+  body{
+    margin:0;
+    background:#0f172a;
+    color:white;
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    padding:20px;
+  }
+  h1{text-align:center;margin-bottom:20px;}
+  .product{
+    background:#1e293b;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:16px;
+  }
+  button{
+    background:#38bdf8;
+    color:#000;
+    padding:10px 14px;
+    border:none;
+    border-radius:8px;
+    font-weight:600;
+    margin-top:10px;
+  }
+  #cart{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#22d3ee;
+    color:#000;
+    padding:14px 20px;
+    border-radius:50px;
+    font-weight:700;
+  }
+</style>
+</head>
+<body>
+
+<h1>AVERX 商店</h1>
+
+<div class="product">
+  <h2>AVERX 黑色卫衣</h2>
+  <p>价格：<b>￥199</b></p>
+  <button onclick="addCart(199)">加入购物车</button>
+</div>
+
+<div class="product">
+  <h2>AVERX 白色短袖</h2>
+  <p>价格：<b>￥129</b></p>
+  <button onclick="addCart(129)">加入购物车</button>
+</div>
+
+<div class="product">
+  <h2>AVERX 蓝色运动裤</h2>
+  <p>价格：<b>￥159</b></p>
+  <button onclick="addCart(159)">加入购物车</button>
+</div>
+
+<div id="cart" onclick="goCheckout()">🛒 购物车：￥<span id="total">0</span></div>
+
+<script>
+let total = 0;
+
+function addCart(price){
+  total += price;
+  document.getElementById("total").innerText = total;
+}
+
+function goCheckout(){
+  window.location.href = "checkout.html?total=" + total;
+}
+</script>
+
+</body>
+</html>
